@@ -107,7 +107,7 @@ def main():
     )
     st.title("AI Innovator LLM & RAG")
     st.subheader("Chatbot ที่ช่วยตอบคำถามเกี่ยวกับสถานที่ท่องเที่ยวในจังหวัดน่าน")
-    st.subheader("ผู้พัฒนาโดย: Jeerasak ss4 (Game)")
+    st.subheader("ผู้พัฒนาโดย: Jeerasak ss4 (Game) ")
 
     # เพิ่มข้อมูลเอกสารลงใน Qdrant
     add_documents_to_qdrant(documents)
