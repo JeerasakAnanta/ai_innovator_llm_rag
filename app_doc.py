@@ -99,6 +99,7 @@ def generate_answer(query):
 
 # 7. สร้างอินเทอร์เฟซด้วย Streamlit
 def main():
+    
     st.set_page_config(
         page_title="RAG Chatbot  ",
         page_icon=":robot:",
@@ -106,6 +107,7 @@ def main():
     )
     st.title("AI Innovator LLM & RAG")
     st.subheader("Chatbot ที่ช่วยตอบคำถามเกี่ยวกับสถานที่ท่องเที่ยวในจังหวัดน่าน")
+    st.subheader("ผู้พัฒนาโดย: Jeerasak ss4")
 
     # เพิ่มข้อมูลเอกสารลงใน Qdrant
     add_documents_to_qdrant(documents)
