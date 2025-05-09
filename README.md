@@ -1,15 +1,16 @@
 # AI Innovator workshops  LLM and RAG
+ 
+## ภาพรวม (Overview) 
 
-## Overview
-
-- workshop นี้เป็นแชทบอทใช้งาน **Large Language Model (LLM)**กับการใช้เทคนิค   **Retrieval-Augmented Generation (RAG)** 
+- Workshop นี้เป็นแชทบอทใช้งาน **Large Language Model (LLM)** กับการใช้เทคนิค   **Retrieval-Augmented Generation (RAG)** 
 - โดยใช้ **Streamlit** สำหรับสร้างอินเทอร์เฟซผู้ใช้ (UI),
 - มี **Qdrant vecter database** เป็นฐานข้อมูลเวกเตอร์ 
 - เรียกใช้งาน **Groq** เป็นโมเดลภาษา (LLM) ที่ใช้สร้างคำตอบ แชทบอทนี้สามารถประมวลผลไฟล์ **PDF**, แยกข้อความจากไฟล์, และ ตอบคำถามผู้ใช้โดยใช้ข้อมูลจากไฟล์ PDF ที่อัปโหลด
+- มีการใช้งาน Streamlit 
 ---
-## คุณสมบัติ (Features)
+## ฟีเจอร์ (Features)
 
-- **อัปโหลดไฟล์ PDF**: ผู้ใช้สามารถอัปโหลดไฟล์ PDF และระบบจะแยกข้อความจากไฟล์
+- **อัปโหลดไฟล์ PDF**: **ผู้ใช้สามารถอัปโหลดไฟล์** PDF และระบบจะแยกข้อความจากไฟล์
 - **ฐานข้อมูลเวกเตอร์ (Qdrant)**: ข้อความที่แยกได้จะถูกแปลงเป็นเวกเตอร์และเก็บไว้ใน **Qdrant** ซึ่งเป็นฐานข้อมูลเวกเตอร์ ใน RAM
 - **ตอบคำถาม**: ผู้ใช้สามารถถามคำถาม และระบบจะค้นหาข้อมูลที่เกี่ยวข้องจาก PDF โดยใช้ Qdrant และสร้างคำตอบโดยใช้โมเดลภาษา **Groq**
 - **การจัดการคีย์ API**: คีย์ API และการตั้งค่าที่สำคัญจะถูกเก็บไว้ในไฟล์ `.env` เพื่อความปลอดภัย
@@ -19,36 +20,39 @@
 
 ก่อนรันแอปพลิเคชันนี้ ต้องมีสิ่งต่อไปนี้:
 
-1. ติดตั้ง **Python 3.13 หรือ สูงกว่า**
-2. มี **Groq API Key** ซึ่งสามารถขอได้ที่ [เว็บไซต์ Groq](https://groq.com/)
-3. ติดตั้งไลบรารี Python ที่จำ
-4. เป็น (อยู่ในไฟล์ `requirements.txt`)
-
+1. ติดตั้ง **Python 3.12 หรือ สูงกว่า**
+2. มี **Groq API Key** ซึ่งท่านสามารถขอได้ที่ [เว็บไซต์ Groq](https://groq.com/)
+3. ติดตั้งไลบรารี Python ที่จำเป็นในไฟล์ `requirements.txt` 
 ---
 
 ## การติดตั้ง (Installation)
 
-## clone with AI Innovator On GitHub
+### clone project from AI Innovator On GitHub
 
 ```bash  
 git clone https://github.com/JeerasakAnanta/ai_innovator_llm_rag.git
 ```
-
-1. **สร้าง virtual environment** (จำเป็น):
-   - window 
+### 1. สร้าง virtual environment (จำเป็นมาก)
+   - สำหรับ window 
    ```bash
    python -m venv .llm_rag
    .llm_rag\Scripts\activate
    ```
+   - สำหรับผู้ใช้ linux 
+   ```bash
+   python3 -m venv .llm_rag
+   .llm_rag/bin/activate
+   ```
 
-2. **ติดตั้ง dependencies**
+### 2.ติดตั้ง dependencies
+
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **ตั้งค่าไฟล์ `.env`**
-   - สร้างไฟล์ชื่อ `.env` ในโฟลเดอร์หลัก
-   - เพิ่ม Groq API Key ของคุณลงในไฟล์:
+### ตั้งค่าในไฟล์ `.env`
+   - สร้างไฟล์ชื่อ `.env` ในโฟลเดอร์หลัก หรือเปลี่ยน `.env.example` ให้เป็น `.env` 
+   - เพิ่ม Groq API Key ของคุณลงในไฟล์ `.env`
      ```bash
       GROQ_API_KEY=Your_Groq_Api_Key_Here
      ```
@@ -57,24 +61,25 @@ git clone https://github.com/JeerasakAnanta/ai_innovator_llm_rag.git
       set GROQ_API_KEY=Your_Groq_Api_Key_Here
       ```
 ---
-## การรันแอปพลิเคชัน
+### การรันแอปพลิเคชัน  Streamlit
+- `app_doc.py` โปรแกรม หลักในการทำงา 
+- `app_pdf.py` เปลี่ยน dataloader ให้เป็น docling 
+- `app_gogle_drive.py` เปลี่ยน dataloader ให้เป็น gdown นำข้อมูลมาจาก gogole Drive
 
-1. รันแอปพลิเคชันด้วย Streamlit:
+1. รันแอปพลิเคชันด้วย Streamlit
    ```bash
    streamlit run app_doc.py
    ```
 
 2. เปิดเบราว์เซอร์และไปที่ URL ที่แสดงใน terminal (ปกติจะเป็น `http://localhost:8501`)
 
-3. **อัปโหลดไฟล์ PDF** โดยใช้ตัวอัปโหลดไฟล์ในอินเทอร์เฟซของ Streamlit
-
-4. เมื่อประมวลผลไฟล์ PDF เสร็จสิ้น คุณสามารถเริ่มถามคำถามในช่องแชทได้
+3. เมื่อประมวลผลไฟล์ PDF เสร็จสิ้น คุณสามารถเริ่มถามคำถามในช่องแชทได้
 
 ---
 ## วิธีการทำงาน (Workflow)
 
 ### 1. **การประมวลผลไฟล์ PDF**
-   - แอปพลิเคชันใช้ `PyPDF2` เพื่อแยกข้อความจากไฟล์ PDF ที่อัปโหลด
+   - แอปพลิเคชันใช้ `PyPDF2` หรือ `docling` เพื่อแยกข้อความจากไฟล์ PDF ที่อัปโหลด 
    - ข้อความจะถูกแบ่งเป็นส่วนย่อย (เช่น ย่อหน้าหรือประโยค) เพื่อให้การค้นหามีประสิทธิภาพมากขึ้น
 
 ### 2. **ฐานข้อมูลเวกเตอร์ (Qdrant)**
@@ -90,7 +95,6 @@ git clone https://github.com/JeerasakAnanta/ai_innovator_llm_rag.git
 ### 4. **อินเทอร์เฟซ Streamlit**
    - อินเทอร์เฟซผู้ใช้ถูกสร้างด้วย **Streamlit** ซึ่งช่วยให้ผู้ใช้สามารถอัปโหลดไฟล์ PDF และสนทนากับแชทบอทได้ง่าย
 
----
 
 ## โครงสร้างไฟล์ (File Structure)
 
@@ -145,11 +149,12 @@ git clone https://github.com/JeerasakAnanta/ai_innovator_llm_rag.git
 - **SentenceTransformer**: สำหรับการสร้างเวกเตอร์จากข้อความ
 - **PyPDF2**: สำหรับการแยกข้อความจากไฟล์ PDF
 - **python-dotenv**: สำหรับการจัดการ environment variables
+- **Docling**: ใช้งานสำหรับการแปลง pdf ให้เป็นข้อความ text **
 
 ---
 
 ## Technologies
-
+- **Python**: สำหรับการพัฒนาโปรแกรม
 - **Groq**: สำหรับการให้บริการ LLM API
 - **Qdrant**: สำหรับฐานข้อมูลเวกเตอร์
 - **Streamlit**: สำหรับเฟรมเวิร์กเว็บที่ใช้งานง่าย
