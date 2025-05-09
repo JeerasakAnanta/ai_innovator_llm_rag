@@ -6,3 +6,5 @@ langchain
 python-dotenv
 pypdf
 langchain-community
+docling
+gdown
