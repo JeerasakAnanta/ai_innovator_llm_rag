@@ -102,5 +102,22 @@ def main():
         role = "Bot" if msg["role"] == "assistant" else "คุณ"
         st.write(f"**{role}:** {msg['content']}")
 
+
+    st.markdown(
+        """
+        <style>
+            .stTextInput>div>div>input {
+                border: 2px solid #4CAF50;
+                border-radius: 5px;
+            }
+           
+            .reportview-container .main .block-container {
+                background-color: #fffff;
+            }            
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+    
 if __name__ == "__main__":
     main()
