@@ -5,12 +5,11 @@
 - Workshop นี้เป็นแชทบอทใช้งาน **Large Language Model (LLM)** กับการใช้เทคนิค   **Retrieval-Augmented Generation (RAG)** 
 - โดยใช้ **Streamlit** สำหรับสร้างอินเทอร์เฟซผู้ใช้ (UI),
 - มี **Qdrant vecter database** เป็นฐานข้อมูลเวกเตอร์ 
-- เรียกใช้งาน **Groq** เป็นโมเดลภาษา (LLM) ที่ใช้สร้างคำตอบ แชทบอทนี้สามารถประมวลผลไฟล์ **PDF**, แยกข้อความจากไฟล์, และ ตอบคำถามผู้ใช้โดยใช้ข้อมูลจากไฟล์ PDF ที่อัปโหลด
-- มีการใช้งาน Streamlit 
+- เรียกใช้งาน **Groq** เป็นโมเดลภาษา (LLM) ที่ใช้สร้างคำตอบ แชทบอทนี้สามารถประมวลผลไฟล์ **PDF**, แยกข้อความจากไฟล์, และ ตอบคำถามผู้ใช้โดยใช้ข้อมูลจากไฟล์ PDF 
 ---
 ## ฟีเจอร์ (Features)
 
-- **อัปโหลดไฟล์ PDF**: **ผู้ใช้สามารถอัปโหลดไฟล์** PDF และระบบจะแยกข้อความจากไฟล์
+- **อ่านข้อความจาก PDF**
 - **ฐานข้อมูลเวกเตอร์ (Qdrant)**: ข้อความที่แยกได้จะถูกแปลงเป็นเวกเตอร์และเก็บไว้ใน **Qdrant** ซึ่งเป็นฐานข้อมูลเวกเตอร์ ใน RAM
 - **ตอบคำถาม**: ผู้ใช้สามารถถามคำถาม และระบบจะค้นหาข้อมูลที่เกี่ยวข้องจาก PDF โดยใช้ Qdrant และสร้างคำตอบโดยใช้โมเดลภาษา **Groq**
 - **การจัดการคีย์ API**: คีย์ API และการตั้งค่าที่สำคัญจะถูกเก็บไว้ในไฟล์ `.env` เพื่อความปลอดภัย
@@ -44,11 +43,35 @@ git clone https://github.com/JeerasakAnanta/ai_innovator_llm_rag.git
    .llm_rag/bin/activate
    ```
 
-### 2.ติดตั้ง dependencies
+### ติดตั้ง dependencies
 
    ```bash
    pip install -r requirements.txt
    ```
+### (Optional) หรือใช้งาน uv 
+
+## uv 
+- ติดตั้ง  install  uv 
+```bash  
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+- ตัวสอบ  check uv
+```bash 
+uv --version 
+```
+
+- ติดตั้ง  install  uv 
+```bash 
+uv add -r requirements.txt
+```
+- สร้าง virtual envorment  
+```bash 
+uv create -n .llm_rag
+``` 
+- เปิดใช้งาน virtual envorment  
+```bash
+source .llm_rag/bin/activate
+``` 
 
 ### ตั้งค่าในไฟล์ `.env`
    - สร้างไฟล์ชื่อ `.env` ในโฟลเดอร์หลัก หรือเปลี่ยน `.env.example` ให้เป็น `.env` 
@@ -62,13 +85,13 @@ git clone https://github.com/JeerasakAnanta/ai_innovator_llm_rag.git
       ```
 ---
 ### การรันแอปพลิเคชัน  Streamlit
-- `app_doc.py` โปรแกรม หลักในการทำงา 
+- `app_doc.py` โปรแกรม หลักในการทำงาน 
 - `app_pdf.py` เปลี่ยน dataloader ให้เป็น docling 
 - `app_gogle_drive.py` เปลี่ยน dataloader ให้เป็น gdown นำข้อมูลมาจาก gogole Drive
 
 1. รันแอปพลิเคชันด้วย Streamlit
    ```bash
-   streamlit run app_doc.py
+   streamlit run app_pdf.py
    ```
 
 2. เปิดเบราว์เซอร์และไปที่ URL ที่แสดงใน terminal (ปกติจะเป็น `http://localhost:8501`)
@@ -121,9 +144,9 @@ git clone https://github.com/JeerasakAnanta/ai_innovator_llm_rag.git
 
 ## ตัวอย่างคำถาม
 
-- **คำถาม**: "เอกสารนี้พูดถึงเรื่องอะไร?"
-- **คำถาม**: "สรุปประเด็นสำคัญได้ไหม?"
-- **คำถาม**: "มีข้อดีอะไรบ้างที่กล่าวถึงในเอกสาร?"
+- **คำถาม** "เอกสารนี้พูดถึงเรื่องอะไร?"
+- **คำถาม** "สรุปประเด็นสำคัญได้ไหม?"
+- **คำถาม** "มีข้อดีอะไรบ้างที่กล่าวถึงในเอกสาร"
 
 ---
 
@@ -159,12 +182,6 @@ git clone https://github.com/JeerasakAnanta/ai_innovator_llm_rag.git
 - **Qdrant**: สำหรับฐานข้อมูลเวกเตอร์
 - **Streamlit**: สำหรับเฟรมเวิร์กเว็บที่ใช้งานง่าย
 
-
-## uv 
-- install  uv 
-- ```bash  
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
 
 ---
 
