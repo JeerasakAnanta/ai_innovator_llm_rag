@@ -159,6 +159,13 @@ git clone https://github.com/JeerasakAnanta/ai_innovator_llm_rag.git
 - **Qdrant**: สำหรับฐานข้อมูลเวกเตอร์
 - **Streamlit**: สำหรับเฟรมเวิร์กเว็บที่ใช้งานง่าย
 
+
+## uv 
+- install  uv 
+- ```bash  
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
 ---
 
 ## ติดต่อ
